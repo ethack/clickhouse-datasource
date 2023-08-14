@@ -584,3 +584,13 @@ func TestSimpleAggregateFunction(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, msg, *v.(*json.RawMessage))
 }
+
+func TestPoint(t *testing.T) {
+	value := [][]int{{1, 2}, {1, 2}}
+	sut := converters.GetConverter("Point")
+	v, err := sut.FrameConverter.ConverterFunc(&value)
+	assert.Nil(t, err)
+	msg, err := toJson(value)
+	assert.Nil(t, err)
+	assert.Equal(t, msg, *v.(*json.RawMessage))
+}
